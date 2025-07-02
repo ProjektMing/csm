@@ -1,49 +1,59 @@
-package com.example.demo.model.dao;
+package io.github.projektming.csm.model.dao;
+
+import io.github.projektming.csm.util.SqlConnector;
 
 import java.sql.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BaseDao {
-    private static final String url = "jdbc:postgresql://localhost:5432/postgres";
-    private static final String user = "postgres";
-    private static final String password = "123098";
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url,user,password);
+
+    protected static final Logger logger = Logger.getLogger(BaseDao.class.getName());
+
+    static Connection getConnection() {
+        return SqlConnector.getConnection();
+    }
+    static void closeConnection(Connection conn) {
+        SqlConnector.closeAll(conn,null,null);
     }
 
-    public static void closeAll(Connection conn,Statement stmt,ResultSet rs) throws SQLException {
-        if(rs!=null) {
-            rs.close();
-        }
-        if(stmt!=null) {
-            stmt.close();
-        }
-        if(conn!=null) {
-            conn.close();
-        }
-    }
-    public int executeSQL(String preparedSql, Object[] param) {
+    // 通用的更新方法 (INSERT, UPDATE, DELETE)
+    public int executeUpdate(String sql, Object[] params) {
+        int affectedRows = 0;
         Connection conn = null;
         PreparedStatement pstmt = null;
-        /* 处理SQL,执行SQL */
+
         try {
-            conn = getConnection(); // 得到数据库连接
-            pstmt = conn.prepareStatement(preparedSql); // 得到PreparedStatement对象
-            if (param != null) {
-                for (int i = 0; i < param.length; i++) {
-                    pstmt.setObject(i + 1, param[i]); // 为预编译sql设置参数
+            conn = SqlConnector.getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    pstmt.setObject(i + 1, params[i]);
                 }
             }
-            ResultSet num = pstmt.executeQuery(); // 执行SQL语句
+
+            affectedRows = pstmt.executeUpdate();
+
         } catch (SQLException e) {
-            Logger.getLogger(BaseDao.class.getName()).log(Level.SEVERE, "SQL 语句出现问题", e);
+            logger.log(Level.SEVERE, "Error executing update: " + sql, e);
         } finally {
-            try {
-                BaseDao.closeAll(conn, pstmt, null);
-            } catch (SQLException e) {
-                Logger.getLogger(BaseDao.class.getName()).log(Level.SEVERE,"无法关闭SQL连接",e);
+            SqlConnector.closeAll(conn, pstmt, null);
+        }
+
+        return affectedRows;
+    }
+
+    // 通用的查询方法 (SELECT)
+    // 注意：此方法将连接的管理责任转移给了调用者，
+    // 调用者在使用完 ResultSet 和 PreparedStatement 后必须手动关闭它们和连接。
+    public ResultSet executeQuery(Connection conn, String sql, Object[] params) throws SQLException {
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        if (params != null) {
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
             }
         }
-        return 0;
+        return pstmt.executeQuery();
     }
 }

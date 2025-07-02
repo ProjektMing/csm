@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SqlConnecter {
+public class SqlConnector {
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
     private static final String PASSWORD = "123098";
-    private static final Logger logger = Logger.getLogger(SqlConnecter.class.getName());
+    private static final Logger logger = Logger.getLogger(SqlConnector.class.getName());
 
     static {
         try {

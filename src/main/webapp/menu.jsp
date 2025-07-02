@@ -5,12 +5,19 @@
   Time: 08:23
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="your.package.User" %>
+<%@ page import="io.github.projektming.csm.model.beans.User" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Menu</title>
+    <link rel="stylesheet" type="text/css" href="styles/md3.less">
+</head>
+<body>
 <div class="user-profile">
     <%
         // 从session获取用户信息（示例）
         User currentUser = (User) session.getAttribute("currentUser");
-        String username = (currentUser != null) ? currentUser.getName() : "Guest";
+        String username = (currentUser != null) ? currentUser.getUsername() : "Guest";
     %>
 
     <div class="dropdown">
@@ -27,63 +34,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .user-profile {
-        position: relative;
-        display: inline-block;
-        font-family: Arial, sans-serif;
-    }
-
-    .dropdown-toggle {
-        background: #4285f4;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .dropdown-menu {
-        display: none;
-        position: absolute;
-        background: white;
-        min-width: 160px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        border-radius: 4px;
-        z-index: 100;
-        right: 0;
-        top: 100%;
-        margin-top: 5px;
-    }
-
-    .dropdown-menu a {
-        display: block;
-        padding: 10px 15px;
-        text-decoration: none;
-        color: #333;
-        border-bottom: 1px solid #eee;
-    }
-
-    .dropdown-menu a:hover {
-        background-color: #f5f5f5;
-    }
-
-    .divider {
-        height: 1px;
-        background: #eee;
-        margin: 5px 0;
-    }
-
-    .caret {
-        display: inline-block;
-        margin-left: 5px;
-        border-top: 5px solid;
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-    }
-</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -103,3 +53,5 @@
         });
     });
 </script>
+</body>
+</html>

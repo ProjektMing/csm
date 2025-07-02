@@ -1,11 +1,9 @@
-package com.example.demo.model.dao;
+package io.github.projektming.csm.model.dao;
 
-import com.example.demo.model.beans.User;
-
-import java.sql.SQLException;
+import io.github.projektming.csm.model.beans.User;
 
 public interface UserDao {
-    public void addUser(User user) throws SQLException;
+    public void addUser(User user);
     public void deleteUser(User user);
     public void updateUser(User user);
 }

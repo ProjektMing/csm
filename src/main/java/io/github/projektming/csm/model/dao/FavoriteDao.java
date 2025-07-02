@@ -2,7 +2,7 @@ package io.github.projektming.csm.model.dao;
 
 import io.github.projektming.csm.model.beans.Favorite;
 import java.util.List;
-
+import java.math.BigDecimal;
 public interface FavoriteDao {
     // 添加收藏
     boolean addFavorite(Favorite favorite);
@@ -30,4 +30,6 @@ public interface FavoriteDao {
 
     // 获取用户对特定餐厅的收藏
     Favorite getFavoriteByUserAndRestaurant(Integer userId, Integer restaurantId);
+
+    boolean updateFavoriteRating(Integer favoriteId, BigDecimal rating);
 }

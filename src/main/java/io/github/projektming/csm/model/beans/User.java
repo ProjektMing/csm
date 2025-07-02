@@ -1,41 +1,31 @@
-package com.example.demo.model.beans;
+package io.github.projektming.csm.model.beans;
 
 public class User {
-    private final int Id;
-    private static int id;
-    private String Name;
-    private String Email;
-    private String Password;
-    public User(String name, String email, String password) {
-        Id = id++;
-        Name = name;
+    private int userId;
+    private String username;
+    private String password;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public int getId() {
-        return Id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return Name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
-    }
-
-    public boolean isPasswordValid(String password) {
-        return Password.equals(password);
+        this.password = password;
     }
 }

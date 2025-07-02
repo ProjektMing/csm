@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.math.BigDecimal;
 public class FavoriteDaoImpl extends BaseDao implements FavoriteDao {
 
     private static final Logger logger = Logger.getLogger(FavoriteDaoImpl.class.getName());
@@ -182,6 +182,18 @@ public class FavoriteDaoImpl extends BaseDao implements FavoriteDao {
         favorite.setRestaurantId(rs.getInt("restaurant_id"));
         favorite.setRating(rs.getBigDecimal("rating"));
         return favorite;
+    }
+    @Override
+    public boolean updateFavoriteRating(Integer favoriteId, BigDecimal rating) {
+        String sql = "UPDATE Favorites SET rating = ? WHERE favorite_id = ?";
+        Object[] params = {rating, favoriteId};
+
+        try {
+            return executeUpdate(sql, params) > 0;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "更新收藏评分失败", e);
+            return false;
+        }
     }
 
 }
