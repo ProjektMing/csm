@@ -48,6 +48,15 @@ public class FavoriteServlet extends HttpServlet {
 
         try {
             int restaurantId = Integer.parseInt(restaurantIdStr);
+
+            // 首先检查是否已经收藏
+            if (favoriteDao.isRestaurantFavoriteByUser(user.getUserId(), restaurantId)) {
+                responseMap.put("success", true);
+                responseMap.put("message", "Already in favorites.");
+                resp.getWriter().write(JsonUtil.toJson(responseMap));
+                return;
+            }
+
             Favorite favorite = new Favorite();
             favorite.setUserId(user.getUserId());
             favorite.setRestaurantId(restaurantId);

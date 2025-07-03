@@ -31,7 +31,7 @@ CREATE TABLE Favorites (
     favorite_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     restaurant_id INT NOT NULL,
-    rating DECIMAL(3,1) CHECK (rating >= 0 AND rating <= 10),
+    rating DECIMAL(3, 1) CHECK (rating >= 0 AND rating <= 10) DEFAULT 8.0,
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id),
     UNIQUE (user_id, restaurant_id)

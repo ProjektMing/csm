@@ -2,6 +2,7 @@ package io.github.projektming.csm.util;
 
 import io.github.projektming.csm.model.beans.Restaurant;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -75,6 +76,16 @@ public class JsonUtil {
                 .replace("\n", "\\n")
                 .replace("\r", "\\r")
                 .replace("\t", "\\t");
+    }
+
+    public static String toJson(List<Map<String, Object>> favorites) {
+        if (favorites == null || favorites.isEmpty()) {
+            return "[]";
+        }
+        String entries = favorites.stream()
+                .map(JsonUtil::toJson)
+                .collect(Collectors.joining(","));
+        return "[" + entries + "]";
     }
 }
 

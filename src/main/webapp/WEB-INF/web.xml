@@ -22,4 +22,13 @@
         <url-pattern>/register.action</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>GetFavoritesServlet</servlet-name>
+        <servlet-class>io.github.projektming.csm.controller.GetFavoritesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetFavoritesServlet</servlet-name>
+        <url-pattern>/favorites.action</url-pattern>
+    </servlet-mapping>
+
 </web-app>
