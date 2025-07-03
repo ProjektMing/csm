@@ -30,6 +30,9 @@
 
     <div class="button-container">
         <button id="randomize-button" class="button">开始选择</button>
+        <p>
+            <button id="view-favorites-button" class="button secondary">查看收藏</button>
+        </p>
     </div>
 </div>
 

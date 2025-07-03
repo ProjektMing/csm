@@ -97,3 +97,8 @@ favoriteButton.addEventListener('click', function () {
             favoriteButton.disabled = false;
         });
 });
+
+// 添加查看收藏按钮的事件监听
+document.getElementById('view-favorites-button').addEventListener('click', function () {
+    window.location.href = './favorites.jsp';
+});
