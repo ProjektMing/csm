@@ -9,10 +9,10 @@ import java.util.logging.Level;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
         Object[] params = {user.getUsername(), user.getPassword()};
-        executeUpdate(sql, params);
+        return executeUpdate(sql, params) > 0;
 
     }
 

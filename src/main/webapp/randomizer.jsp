@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="io.github.projektming.csm.model.beans.Restaurant" %>
 <html>
 <head>
     <title>今天吃什么？</title>

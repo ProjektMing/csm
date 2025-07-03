@@ -10,5 +10,9 @@
     <h1>Index Page</h1>
     <a href="randomizer.jsp" class="button">Go to Gacha</a>
     <a href="menu.jsp" class="button">Go to Menu</a>
+    <a href="login.jsp" class="button">Login</a>
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-secondary);">
+        <p>美食选择助手 - 让每一餐都充满惊喜</p>
+    </footer>
 </body>
 </html>
