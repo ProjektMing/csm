@@ -1,5 +1,7 @@
 package io.github.projektming.csm.model.beans;
 
+import io.github.projektming.csm.util.Crypto;
+
 public class User {
     private int userId;
     private String username;
@@ -26,6 +28,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Crypto.getSimpleHash(password);
     }
 }

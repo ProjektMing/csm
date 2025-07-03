@@ -1,0 +1,78 @@
+.flipper-container {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    margin: 40px auto;
+}
+
+.flipper {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.flipper.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.flipper-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.flipper-front {
+    background-color: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.flipper-back {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    transform: rotateY(180deg);
+}
+
+#result-name {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+#result-description {
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+#favorite-button {
+    margin-top: 16px;
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: none;
+}
+
+#favorite-button:hover {
+    background-color: var(--md-sys-color-tertiary);
+    color: var(--md-sys-color-on-tertiary);
+}
+
+#favorite-button:disabled {
+    background-color: var(--md-sys-color-surface-disabled);
+    color: var(--md-sys-color-on-surface-disabled);
+    cursor: not-allowed;
+}
