@@ -17,14 +17,20 @@
                 <h2>准备好了吗？</h2>
             </div>
             <div class="flipper-face flipper-back">
-                <h2 id="result-name"></h2>
-                <p id="result-description"></p>
-                <button id="favorite-button">❤️ 喜欢</button>
+                <div class="card__face card__face--back">
+                    <div class="card__content">
+                        <h2 id="result-name" class="card__header">餐厅名称</h2>
+                        <p id="result-description" class="card__body">餐厅简介</p>
+                        <button id="favorite-button" class="favorite-button" style="display: none;">❤️ 喜欢</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <button id="randomize-button" class="button">开始选择</button>
+    <div class="button-container">
+        <button id="randomize-button" class="button">开始选择</button>
+    </div>
 </div>
 
 <script src="${pageContext.request.contextPath}/js/randomizer.js" data-context-path="${pageContext.request.contextPath}"

@@ -2,12 +2,14 @@ package io.github.projektming.csm.model.dao;
 
 import io.github.projektming.csm.model.beans.Favorite;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.math.BigDecimal;
 public class FavoriteDaoImpl extends BaseDao implements FavoriteDao {
 
     private static final Logger logger = Logger.getLogger(FavoriteDaoImpl.class.getName());
@@ -18,7 +20,7 @@ public class FavoriteDaoImpl extends BaseDao implements FavoriteDao {
         Object[] params = {
                 favorite.getUserId(),
                 favorite.getRestaurantId(),
-                favorite.getRating()
+                null // 默认评分为null
         };
 
         try {
@@ -196,4 +198,33 @@ public class FavoriteDaoImpl extends BaseDao implements FavoriteDao {
         }
     }
 
+    @Override
+    public List<Map<String, Object>> getFavoriteDetailsByUserId(Integer userId) {
+        String sql = "SELECT f.*, r.name as restaurant_name, r.description as restaurant_description " +
+                "FROM Favorites f " +
+                "JOIN Restaurants r ON f.restaurant_id = r.restaurant_id " +
+                "WHERE f.user_id = ?";
+        List<Map<String, Object>> favoriteDetails = new ArrayList<>();
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                ResultSetMetaData md = rs.getMetaData();
+                int columns = md.getColumnCount();
+                while (rs.next()) {
+                    Map<String, Object> row = new HashMap<>(columns);
+                    for (int i = 1; i <= columns; ++i) {
+                        row.put(md.getColumnLabel(i), rs.getObject(i));
+                    }
+                    favoriteDetails.add(row);
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "获取用户收藏详情列表失败", e);
+        }
+
+        return favoriteDetails;
+    }
 }

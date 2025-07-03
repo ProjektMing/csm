@@ -1,5 +1,6 @@
 let randomizeButton = document.getElementById("randomize-button");
 let favoriteButton = document.getElementById("favorite-button");
+let currentRestaurantId = null; // 用于存储当前餐厅的ID
 
 randomizeButton.addEventListener('click', function () {
     // 如果卡片已经翻转，先翻回去
@@ -31,6 +32,7 @@ randomizeButton.addEventListener('click', function () {
                 // 更新背面卡片内容
                 document.getElementById('result-name').textContent = data.name;
                 document.getElementById('result-description').textContent = data.description;
+                currentRestaurantId = data.restaurantId; // 保存餐厅ID
 
                 // 翻转卡片
                 flipper.classList.add('is-flipped');
@@ -50,4 +52,48 @@ randomizeButton.addEventListener('click', function () {
                 randomizeButton.textContent = '再试一次';
             });
     }, 300);
+});
+
+favoriteButton.addEventListener('click', function () {
+    if (!currentRestaurantId) {
+        console.error('No restaurant selected to favorite.');
+        return;
+    }
+
+    favoriteButton.disabled = true;
+    favoriteButton.textContent = '...';
+
+    fetch('./favorite', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'restaurantId': currentRestaurantId
+        })
+    })
+        .then(response => {
+            if (response.status === 401) {
+                window.location.href = './login.jsp';
+                throw new Error('User not logged in');
+            }
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                favoriteButton.textContent = '已收藏';
+            } else {
+                favoriteButton.textContent = '收藏失败';
+                console.error('Failed to favorite:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error favoriting restaurant:', error);
+            favoriteButton.textContent = '出错';
+            // Re-enable button if there was an error, so user can try again
+            favoriteButton.disabled = false;
+        });
 });
