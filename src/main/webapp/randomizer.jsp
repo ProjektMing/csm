@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>今天吃什么？</title>
-    <link rel="stylesheet" type="text/css" href="styles/md3.less">
+    <link rel="stylesheet" type="text/css" href="styles/md3.css">
+
     <link rel="stylesheet" type="text/css" href="styles/randomizer.css">
 </head>
 <body>
@@ -30,6 +31,9 @@
 
     <div class="button-container">
         <button id="randomize-button" class="button">开始选择</button>
+        <p>
+            <button id="view-favorites-button" class="button secondary">查看收藏</button>
+        </p>
     </div>
 </div>
 

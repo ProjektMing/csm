@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
 @import url('https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css');
 
-// Material Design 3 Color Palette (subset)
 :root {
   --md-sys-color-primary: #6750A4;
   --md-sys-color-on-primary: #FFFFFF;
@@ -52,7 +51,7 @@ body {
 }
 
 .result-card {
-    background-color: #E7E0EC; /* M3 表面变体色 */
+    background-color: var(--md-sys-color-surface-variant); /* M3 表面变体色 */
     border-radius: 16px;
     padding: 24px;
     text-align: center;
@@ -61,11 +60,12 @@ body {
     flex-direction: column;
     justify-content: center;
     margin-bottom: 24px;
+    border: 1px solid var(--md-sys-color-outline);
 }
 
 .result-icon {
     font-size: 64px;
-    color: #6750A4;
+    color: var(--md-sys-color-primary);
     margin-bottom: 16px;
 }
 
@@ -76,17 +76,18 @@ body {
 }
 
 .dish-list {
-    border: 1px solid #79747E; /* M3 轮廓色 */
+    border: 1px solid var(--md-sys-color-outline); /* M3 轮廓色 */
     border-radius: 8px;
     max-height: 300px;
     overflow-y: auto;
+    background-color: var(--md-sys-color-surface);
 }
 
 .dish-item {
     display: flex;
     align-items: center;
     padding: 12px 16px;
-    border-bottom: 1px solid #E6E1E5; /* M3 分隔线色 */
+    border-bottom: 1px solid var(--md-sys-color-outline); /* M3 分隔线色 */
 }
 
 .dish-item:last-child {
@@ -98,7 +99,7 @@ body {
 }
 
 .delete-btn {
-    color: #B3261E; /* M3 错误色 */
+    color: var(--md-sys-color-error); /* M3 错误色 */
 }
 
 .fab {
@@ -107,21 +108,52 @@ body {
     right: 24px;
 }
 
+/* --- Enhanced Button Styles --- */
 button, .button {
-    display: inline-block;
+    display: inline-flex; /* Use flex for alignment */
+    align-items: center;
+    justify-content: center;
     padding: 10px 24px;
-    border-radius: 20px;
+    border-radius: 20px; /* Pill shape */
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     font-weight: 500;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-    transition: box-shadow 0.2s ease-in-out;
+    font-size: 0.875rem;
+    letter-spacing: 0.089em;
+    text-transform: uppercase;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden; /* For ripple effect */
 }
 
 button:hover, .button:hover {
-    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.button.mdc-button--outlined {
+    background-color: transparent;
+    border-color: var(--md-sys-color-outline);
+    color: var(--md-sys-color-primary);
+}
+
+/* --- Enhanced Text Field --- */
+.mdc-text-field--outlined {
+    width: 100%;
+    margin-bottom: 16px;
+    background-color: var(--md-sys-color-surface);
+}
+
+/* --- General Link Style --- */
+a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

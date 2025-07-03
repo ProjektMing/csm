@@ -47,7 +47,6 @@ randomizeButton.addEventListener('click', function () {
                 flipper.classList.add('is-flipped');
             })
             .finally(() => {
-                // 这里同样需要修正为 randomizeButton
                 randomizeButton.disabled = false;
                 randomizeButton.textContent = '再试一次';
             });
@@ -96,4 +95,9 @@ favoriteButton.addEventListener('click', function () {
             // Re-enable button if there was an error, so user can try again
             favoriteButton.disabled = false;
         });
+});
+
+// 添加查看收藏按钮的事件监听
+document.getElementById('view-favorites-button').addEventListener('click', function () {
+    window.location.href = './favorites.jsp';
 });

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机选菜</title>
-    <link rel="stylesheet" type="text/css" href="styles/md3.less">
+    <link rel="stylesheet" type="text/css" href="styles/md3.css">
 </head>
 <body class="mdc-typography">
 <div class="container">

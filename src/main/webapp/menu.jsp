@@ -10,7 +10,8 @@
 <html>
 <head>
     <title>Menu</title>
-    <link rel="stylesheet" type="text/css" href="styles/md3.less">
+    <link rel="stylesheet" type="text/css" href="styles/md3.css">
+
 </head>
 <body>
 <div class="user-profile">

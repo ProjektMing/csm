@@ -41,7 +41,7 @@ public class JsonUtil {
             return "{}";
         }
         String entries = map.entrySet().stream()
-                .map(entry -> "\"" + escapeJson(entry.getKey()) + "\":" + formatValue(entry.getValue()))
+                .map(entry -> "\"" + escapeJson(entry.getKey()) + "\":" + formatValue(entry.getValue() == null ? "null" : entry.getValue()))
                 .collect(Collectors.joining(","));
         return "{" + entries + "}";
     }
